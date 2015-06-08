@@ -311,7 +311,9 @@ def parse_args():
     # http://boto.cloudhackers.com/en/latest/boto_config_tut.html
     home_dir = os.getenv('HOME')
     if home_dir is None or not os.path.isfile(home_dir + '/.boto'):
-        if not os.path.isfile('/etc/boto.cfg'):
+        if not os.path.isfile('/etc/boto.cfg')
+                and not os.path.isfile(os.path.expanduser('~/.boto'))
+                and not os.path.isfile(os.path.expanduser('~/.aws/credentials')):
             if os.getenv('AWS_ACCESS_KEY_ID') is None:
                 print("ERROR: The environment variable AWS_ACCESS_KEY_ID must be set",
                       file=stderr)
